@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>个人网站架构与工作流程图</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root, [data-theme="light"] {
+  --color-bg: #f7f6f2;
+  --color-surface: #f9f8f5;
+  --color-surface-2: #fbfbf9;
+  --color-surface-offset: #f0ede8;
+  --color-border: rgba(40,37,29,0.10);
+  --color-divider: #dcd9d5;
+  --color-text: #28251d;
+  --color-text-muted: #7a7974;
+  --color-text-faint: #bab9b4;
+  --color-primary: #01696f;
+  --color-primary-hover: #0c4e54;
+  --color-primary-highlight: #e0efee;
+
+  /* zone colors */
+  --zone-local-bg: #eef6f6;
+  --zone-local-border: #a8d4d5;
+  --zone-local-accent: #01696f;
+
+  --zone-github-bg: #f0f0f8;
+  --zone-github-border: #b0aee0;
+  --zone-github-accent: #4a4ab8;
+
+  --zone-cdn-bg: #fdf3e8;
+  --zone-cdn-border: #f0c07a;
+  --zone-cdn-accent: #b35c00;
+
+  --zone-dns-bg: #f0f8ee;
+  --zone-dns-border: #98cc8a;
+  --zone-dns-accent: #2a7a1a;
+
+  --zone-user-bg: #f8eef4;
+  --zone-user-border: #d8a8c8;
+  --zone-user-accent: #8a2070;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 18px;
+  --shadow-sm: 0 1px 3px rgba(40,37,29,0.07);
+  --shadow-md: 0 4px 14px rgba(40,37,29,0.09);
+  --shadow-lg: 0 8px 28px rgba(40,37,29,0.12);
+  --font-body: 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+}
+[data-theme="dark"] {
+  --color-bg: #141312;
+  --color-surface: #1c1b19;
+  --color-surface-2: #222120;
+  --color-surface-offset: #1a1918;
+  --color-border: rgba(205,204,202,0.10);
+  --color-divider: #2e2d2b;
+  --color-text: #cdccca;
+  --color-text-muted: #797876;
+  --color-text-faint: #4a4948;
+  --color-primary: #4f98a3;
+  --color-primary-hover: #227f8b;
+  --color-primary-highlight: #1e3535;
+
+  --zone-local-bg: #0e2424;
+  --zone-local-border: #1e5050;
+  --zone-local-accent: #4f98a3;
+
+  --zone-github-bg: #141426;
+  --zone-github-border: #2c2c6c;
+  --zone-github-accent: #8888e0;
+
+  --zone-cdn-bg: #201808;
+  --zone-cdn-border: #6a3800;
+  --zone-cdn-accent: #e09040;
+
+  --zone-dns-bg: #0c1e0a;
+  --zone-dns-border: #2a5020;
+  --zone-dns-accent: #70cc60;
+
+  --zone-user-bg: #1e0e18;
+  --zone-user-border: #5a1e48;
+  --zone-user-accent: #d060a8;
+
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+  --shadow-md: 0 4px 14px rgba(0,0,0,0.4);
+  --shadow-lg: 0 8px 28px rgba(0,0,0,0.5);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-size: 14px;
+  line-height: 1.6;
+  min-height: 100vh;
+  padding: 28px 20px 60px;
+}
+
+/* Header */
+.page-header {
+  max-width: 1100px;
+  margin: 0 auto 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.page-title {
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  font-weight: 700;
+  color: var(--color-text);
+  letter-spacing: -0.02em;
+}
+.page-subtitle {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin-top: 3px;
+}
+.theme-toggle {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 180ms ease;
+  flex-shrink: 0;
+}
+.theme-toggle:hover { background: var(--color-surface-offset); color: var(--color-text); }
+
+/* Main layout */
+.diagram-wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Zone = colored region */
+.zone {
+  border-radius: var(--radius-xl);
+  padding: 20px 22px;
+  position: relative;
+}
+.zone-local   { background: var(--zone-local-bg);  border: 1.5px solid var(--zone-local-border); }
+.zone-github  { background: var(--zone-github-bg); border: 1.5px solid var(--zone-github-border); }
+.zone-cdn     { background: var(--zone-cdn-bg);    border: 1.5px solid var(--zone-cdn-border); }
+.zone-dns     { background: var(--zone-dns-bg);    border: 1.5px solid var(--zone-dns-border); }
+.zone-user    { background: var(--zone-user-bg);   border: 1.5px solid var(--zone-user-border); }
+
+.zone-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 14px;
+}
+.zone-local  .zone-label { background: var(--zone-local-border);  color: var(--zone-local-accent); background: rgba(1,105,111,0.12); color: var(--zone-local-accent); }
+.zone-github .zone-label { background: rgba(74,74,184,0.12); color: var(--zone-github-accent); }
+.zone-cdn    .zone-label { background: rgba(179,92,0,0.12);   color: var(--zone-cdn-accent); }
+.zone-dns    .zone-label { background: rgba(42,122,26,0.12);  color: var(--zone-dns-accent); }
+.zone-user   .zone-label { background: rgba(138,32,112,0.12); color: var(--zone-user-accent); }
+
+/* Nodes grid */
+.nodes-row {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  align-items: stretch;
+}
+.node {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 14px 16px;
+  box-shadow: var(--shadow-sm);
+  flex: 1;
+  min-width: 160px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.node-icon {
+  font-size: 1.2rem;
+  line-height: 1;
+  margin-bottom: 2px;
+}
+.node-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--color-text);
+  letter-spacing: -0.01em;
+}
+.node-subtitle {
+  font-size: 0.72rem;
+  color: var(--color-primary);
+  font-family: var(--font-mono);
+  background: var(--color-primary-highlight);
+  padding: 2px 7px;
+  border-radius: 4px;
+  display: inline-block;
+  width: fit-content;
+}
+.node-desc {
+  font-size: 0.73rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  margin-top: 4px;
+}
+.node-role {
+  font-size: 0.7rem;
+  color: var(--color-text-faint);
+  border-top: 1px solid var(--color-border);
+  padding-top: 6px;
+  margin-top: 4px;
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
+}
+.node-role::before { content: "扮演角色："; color: var(--color-text-muted); white-space: nowrap; }
+.node-config {
+  font-size: 0.68rem;
+  background: var(--color-surface-offset);
+  border-radius: 6px;
+  padding: 6px 9px;
+  color: var(--color-text-muted);
+  margin-top: 4px;
+  font-family: var(--font-mono);
+  line-height: 1.6;
+}
+.node-config b { color: var(--color-text); font-family: var(--font-body); }
+
+/* Arrows between zones */
+.arrow-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 0;
+  position: relative;
+}
+.arrow-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  max-width: 480px;
+  width: 100%;
+}
+.arrow-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+.arrow-pipe {
+  flex: 1;
+  height: 2px;
+  background: var(--color-divider);
+  position: relative;
+}
+.arrow-pipe.active { background: var(--color-primary); }
+.arrow-pipe::after {
+  content: '';
+  position: absolute;
+  right: -1px; top: -4px;
+  border: 5px solid transparent;
+  border-left-color: var(--color-divider);
+}
+.arrow-pipe.active::after { border-left-color: var(--color-primary); }
+.arrow-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  box-shadow: var(--shadow-sm);
+}
+.arrow-sub {
+  font-size: 0.64rem;
+  color: var(--color-text-faint);
+  text-align: center;
+}
+.arrow-vertical {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.arrow-vert-pipe {
+  width: 2px;
+  height: 32px;
+  background: var(--color-divider);
+  position: relative;
+}
+.arrow-vert-pipe.active { background: var(--color-primary); }
+.arrow-vert-pipe::after {
+  content: '';
+  position: absolute;
+  bottom: -1px; left: -4px;
+  border: 5px solid transparent;
+  border-top-color: var(--color-divider);
+}
+.arrow-vert-pipe.active::after { border-top-color: var(--color-primary); }
+.arrow-vertical .arrow-label { font-size: 0.65rem; }
+
+/* Flow steps (numbered) */
+.flow-steps {
+  display: flex;
+  gap: 0;
+  align-items: stretch;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+.flow-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 100px;
+  position: relative;
+}
+.flow-step:not(:last-child)::after {
+  content: '→';
+  position: absolute;
+  right: -12px;
+  top: 12px;
+  font-size: 1rem;
+  color: var(--color-text-faint);
+  z-index: 1;
+}
+.step-num {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(1,105,111,0.25);
+}
+.step-body {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 10px 12px;
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+  width: 100%;
+}
+.step-action {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+.step-detail {
+  font-size: 0.67rem;
+  color: var(--color-text-muted);
+  margin-top: 3px;
+}
+.step-cmd {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  color: var(--color-primary);
+  background: var(--color-primary-highlight);
+  padding: 2px 6px;
+  border-radius: 4px;
+  display: inline-block;
+  margin-top: 4px;
+}
+
+/* Section headers inside zones */
+.section-hd {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--color-text-muted);
+  margin-bottom: 10px;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--color-border);
+}
+.section-hd:first-of-type { margin-top: 0; border-top: none; padding-top: 0; }
+
+/* Two-column layout for reference table */
+.ref-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.73rem;
+  margin-top: 4px;
+}
+.ref-table th {
+  text-align: left;
+  color: var(--color-text-muted);
+  font-weight: 600;
+  padding: 5px 10px;
+  background: var(--color-surface-offset);
+  border-bottom: 1px solid var(--color-border);
+}
+.ref-table th:first-child { border-radius: 6px 0 0 0; }
+.ref-table th:last-child  { border-radius: 0 6px 0 0; }
+.ref-table td {
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text);
+  vertical-align: top;
+}
+.ref-table tr:last-child td { border-bottom: none; }
+.ref-table td:first-child { font-weight: 600; white-space: nowrap; }
+.tag {
+  display: inline-block;
+  font-size: 0.63rem;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-weight: 600;
+  margin-right: 3px;
+}
+.tag-free  { background: rgba(67,122,34,0.12); color: #2a6010; }
+.tag-paid  { background: rgba(218,113,1,0.12);  color: #8a4000; }
+.tag-opt   { background: rgba(0,0,0,0.06); color: var(--color-text-muted); }
+[data-theme="dark"] .tag-free  { background: rgba(109,170,69,0.15); color: #80cc60; }
+[data-theme="dark"] .tag-paid  { background: rgba(253,171,67,0.12); color: #e09040; }
+[data-theme="dark"] .tag-opt   { background: rgba(255,255,255,0.06); color: var(--color-text-muted); }
+
+/* Responsive */
+@media (max-width: 600px) {
+  .nodes-row { flex-direction: column; }
+  .flow-steps { flex-direction: column; align-items: stretch; gap: 10px; }
+  .flow-step::after { display: none; }
+  body { padding: 16px 12px 40px; }
+}
+</style>
+</head>
+<body>
+
+<header class="page-header">
+  <div>
+    <div class="page-title">个人网站架构与工作流程图</div>
+    <div class="page-subtitle">Hugo + GitHub Pages · 从本地编写到用户访问的完整数据流</div>
+  </div>
+  <button class="theme-toggle" data-theme-toggle aria-label="切换深色模式">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+  </button>
+</header>
+
+<div class="diagram-wrapper">
+
+  <!-- ① 本地开发环境 -->
+  <div class="zone zone-local">
+    <div class="zone-label">① 本地开发环境 · Local Machine (macOS)</div>
+    <div class="nodes-row">
+      <div class="node">
+        <div class="node-icon">📝</div>
+        <div class="node-title">内容文件</div>
+        <div class="node-subtitle">content/*.md</div>
+        <div class="node-desc">用 Markdown 格式写文章、日志、项目介绍。纯文本文件，无需了解 HTML。</div>
+        <div class="node-role">内容层 — 你的核心输出物</div>
+        <div class="node-config"><b>推荐配置</b><br>
+          文件路径：<code>content/posts/</code><br>
+          格式：Front Matter (YAML) + Markdown<br>
+          编辑器：VS Code + Markdown Preview
+        </div>
+      </div>
+      <div class="node">
+        <div class="node-icon">🎨</div>
+        <div class="node-title">Hugo 源码</div>
+        <div class="node-subtitle">themes/ · layouts/ · config.toml</div>
+        <div class="node-desc">Hugo 项目结构：主题控制样式，layouts 定制模板，config.toml 设置站点参数。</div>
+        <div class="node-role">内容管理层 — 负责把 .md 转换为 HTML</div>
+        <div class="node-config"><b>推荐配置</b><br>
+          主题：PaperMod / Congo / Blowfish<br>
+          安装：<code>brew install hugo</code><br>
+          预览：<code>hugo server -D</code>
+        </div>
+      </div>
+      <div class="node">
+        <div class="node-icon">⚡</div>
+        <div class="node-title">Hugo 构建引擎</div>
+        <div class="node-subtitle">hugo build → public/</div>
+        <div class="node-desc">执行 <code>hugo</code> 命令后，在毫秒内将所有 .md 文件编译成完整的静态 HTML/CSS/JS 文件包，输出到 public/ 目录。</div>
+        <div class="node-role">编译器 — 生成最终可发布的静态文件</div>
+        <div class="node-config"><b>推荐配置</b><br>
+          不需手动运行；由 GitHub Actions 自动触发<br>
+          构建时间：通常 &lt; 1 秒
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 箭头 1 -->
+  <div class="arrow-row">
+    <div class="arrow-vertical">
+      <div class="arrow-label">git push origin main</div>
+      <div class="arrow-vert-pipe active"></div>
+      <div class="arrow-sub">开发者推送源码（含 .md 文章）到远程仓库</div>
+    </div>
+  </div>
+
+  <!-- ② GitHub 仓库 + Actions -->
+  <div class="zone zone-github">
+    <div class="zone-label">② GitHub · 代码仓库 + 自动化构建</div>
+    <div class="nodes-row">
+      <div class="node">
+        <div class="node-icon">🗄️</div>
+        <div class="node-title">GitHub Repository</div>
+        <div class="node-subtitle">github.com/user/blog</div>
+        <div class="node-desc">存储所有 Hugo 源文件（.md 内容、主题、模板），是项目的"版本控制中心"与"构建触发器"。</div>
+        <div class="node-role">版本控制 + 协作 + 历史记录</div>
+        <div class="node-config"><b>推荐配置</b><br>
+          可见性：Public（GitHub Pages 免费托管需公开）<br>
+          分支策略：main → 触发自动部署<br>
+          <span class="tag tag-free">免费</span>
+        </div>
+      </div>
+      <div class="node">
+        <div class="node-icon">🤖</div>
+        <div class="node-title">GitHub Actions</div>
+        <div class="node-subtitle">.github/workflows/deploy.yml</div>
+        <div class="node-desc">监听 main 分支推送事件，自动执行：安装 Hugo → 运行 hugo build → 将 public/ 部署到 gh-pages 分支。</div>
+        <div class="node-role">CI/CD 自动化管道 — 免去手动部署</div>
+        <div class="node-config"><b>推荐配置</b><br>
+          使用官方 Hugo action：<code>peaceiris/actions-hugo</code><br>
+          触发条件：<code>on: push: branches: [main]</code><br>
+          <span class="tag tag-free">免费</span>（每月 2000 分钟）
+        </div>
+      </div>
+      <div class="node">
+        <div class="node-icon">🌐</div>
+        <div class="node-title">GitHub Pages</div>
+        <div class="node-subtitle">user.github.io/blog</div>
+        <div class="node-desc">GitHub 内置的静态文件托管服务。直接读取 gh-pages 分支的文件并对外提供 HTTP 访问，默认提供 HTTPS。</div>
+        <div class="node-role">托管平台 — 存储并对外提供静态网页</div>
+        <div class="node-config"><b>推荐配置</b><br>
+          Source：Deploy from branch → gh-pages<br>
+          自定义域名：在 Settings → Pages 填入<br>
+          <span class="tag tag-free">免费</span> · HTTPS 自动开启
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 箭头 2 -->
+  <div class="arrow-row">
+    <div class="arrow-vertical">
+      <div class="arrow-label">绑定自定义域名（可选）</div>
+      <div class="arrow-vert-pipe"></div>
+      <div class="arrow-sub">将购买的域名指向 GitHub Pages 服务器 IP</div>
+    </div>
+  </div>
+
+  <!-- ③ DNS + CDN（并排） -->
+  <div style="display:flex; gap:16px; flex-wrap:wrap;">
+
+    <div class="zone zone-dns" style="flex:1; min-width:260px;">
+      <div class="zone-label">③ 域名 &amp; DNS</div>
+      <div class="nodes-row" style="flex-direction:column;">
+        <div class="node">
+          <div class="node-icon">🏷️</div>
+          <div class="node-title">域名注册商</div>
+          <div class="node-subtitle">yourname.com</div>
+          <div class="node-desc">购买你的专属域名。域名本身只是一个"门牌号"，需要通过 DNS 记录才能指向实际服务器。</div>
+          <div class="node-role">唯一标识 — 你在互联网上的地址</div>
+          <div class="node-config"><b>推荐注册商</b><br>
+            Cloudflare Registrar（最便宜，无溢价）<br>
+            Namecheap · Google Domains<br>
+            费用：<span class="tag tag-paid">约 ¥60–100/年</span>
+          </div>
+        </div>
+        <div class="node">
+          <div class="node-icon">📡</div>
+          <div class="node-title">DNS 记录配置</div>
+          <div class="node-subtitle">CNAME / A Record</div>
+          <div class="node-desc">在 DNS 控制台添加记录，将域名映射到 GitHub Pages 的 IP 地址或 CNAME 地址，告诉互联网"访问这个域名请去哪个服务器"。</div>
+          <div class="node-role">地址翻译 — 把域名转化为服务器 IP</div>
+          <div class="node-config"><b>推荐配置</b><br>
+            根域名：<code>A  @  → 185.199.108.153</code>（GitHub Pages IP × 4条）<br>
+            子域名：<code>CNAME  www  → user.github.io</code><br>
+            TTL：3600
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="zone zone-cdn" style="flex:1; min-width:260px;">
+      <div class="zone-label">④ CDN 加速（推荐）</div>
+      <div class="nodes-row" style="flex-direction:column;">
+        <div class="node">
+          <div class="node-icon">☁️</div>
+          <div class="node-title">Cloudflare CDN</div>
+          <div class="node-subtitle">边缘节点缓存</div>
+          <div class="node-desc">将域名 DNS 托管给 Cloudflare 后，它自动在全球 300+ 节点缓存你的静态文件，显著提升国际访问速度（包括香港）。</div>
+          <div class="node-role">加速层 — 降低延迟、防 DDoS、管理 SSL</div>
+          <div class="node-config"><b>推荐配置</b><br>
+            SSL 模式：Full（Strict）<br>
+            缓存规则：Cache Everything for static assets<br>
+            <span class="tag tag-free">免费计划即可满足个人站需求</span>
+          </div>
+        </div>
+        <div class="node" style="background:var(--color-surface-offset); border-style: dashed;">
+          <div class="node-icon">💡</div>
+          <div class="node-title">为什么需要 CDN？</div>
+          <div class="node-desc">GitHub Pages 服务器在美国。香港 / 大陆直连延迟可达 200–400ms。接入 Cloudflare 后，静态文件从最近节点响应，延迟降至 20–50ms。</div>
+          <div class="node-role" style="border:none; padding:0;">此层可选，但强烈推荐</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 箭头 3 -->
+  <div class="arrow-row">
+    <div class="arrow-vertical">
+      <div class="arrow-label">HTTP 请求 → 返回 HTML/CSS/JS 文件</div>
+      <div class="arrow-vert-pipe active"></div>
+      <div class="arrow-sub">用户浏览器通过域名访问，获取页面文件</div>
+    </div>
+  </div>
+
+  <!-- ⑤ 用户端 -->
+  <div class="zone zone-user">
+    <div class="zone-label">⑤ 用户访问</div>
+    <div class="nodes-row">
+      <div class="node">
+        <div class="node-icon">🔍</div>
+        <div class="node-title">DNS 解析</div>
+        <div class="node-subtitle">域名 → IP 地址</div>
+        <div class="node-desc">用户在浏览器输入 <code>yourname.com</code>，本地 DNS 查询将域名解析为 Cloudflare 或 GitHub Pages 的 IP 地址。</div>
+      </div>
+      <div class="node">
+        <div class="node-icon">📦</div>
+        <div class="node-title">页面加载</div>
+        <div class="node-subtitle">浏览器渲染 HTML</div>
+        <div class="node-desc">浏览器收到 HTML 文件，依次加载 CSS、JS、图片，渲染出完整页面。全程无需服务器计算，响应极快。</div>
+      </div>
+      <div class="node">
+        <div class="node-icon">👤</div>
+        <div class="node-title">最终用户</div>
+        <div class="node-subtitle">任意设备 · 全球访问</div>
+        <div class="node-desc">用户看到你的个人网站，浏览文章、作品集、联系方式。网站 7×24 在线，无需你做任何操作。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 完整发布流程 -->
+  <div class="zone" style="background: var(--color-surface); border: 1.5px solid var(--color-border);">
+    <div class="zone-label" style="background: var(--color-surface-offset); color: var(--color-text-muted);">🔄 完整发布流程 — 从写文章到上线只需 3 步</div>
+    <div class="flow-steps">
+      <div class="flow-step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <div class="step-action">写文章</div>
+          <div class="step-detail">在 content/posts/ 新建 .md 文件，用 Markdown 写内容</div>
+          <div class="step-cmd">hugo server -D</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <div class="step-action">本地预览</div>
+          <div class="step-detail">浏览器打开 localhost:1313 实时预览效果</div>
+          <div class="step-cmd">localhost:1313</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <div class="step-action">提交推送</div>
+          <div class="step-detail">git add → commit → push，一条命令发布</div>
+          <div class="step-cmd">git push</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <div class="step-action">自动构建</div>
+          <div class="step-detail">GitHub Actions 自动触发 Hugo 构建，约 30–60 秒完成</div>
+          <div class="step-cmd">Actions CI/CD</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <div class="step-action">全球上线</div>
+          <div class="step-detail">新文章自动出现在你的网站，Cloudflare 缓存更新</div>
+          <div class="step-cmd">yourname.com ✓</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 推荐技术选型表 -->
+  <div class="zone" style="background: var(--color-surface); border: 1.5px solid var(--color-border);">
+    <div class="zone-label" style="background: var(--color-surface-offset); color: var(--color-text-muted);">🛠️ 推荐技术选型与配置速查</div>
+    <table class="ref-table">
+      <thead>
+        <tr>
+          <th>层级</th>
+          <th>推荐工具</th>
+          <th>费用</th>
+          <th>说明与配置要点</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>内容管理</td>
+          <td>Hugo v0.128+</td>
+          <td><span class="tag tag-free">免费</span></td>
+          <td>macOS 安装：<code>brew install hugo</code>；主题推荐 PaperMod / Congo</td>
+        </tr>
+        <tr>
+          <td>代码仓库</td>
+          <td>GitHub</td>
+          <td><span class="tag tag-free">免费</span></td>
+          <td>Public 仓库；main 分支触发 Actions 自动构建</td>
+        </tr>
+        <tr>
+          <td>CI/CD</td>
+          <td>GitHub Actions</td>
+          <td><span class="tag tag-free">免费</span></td>
+          <td>使用 <code>peaceiris/actions-hugo</code> action；每月 2000 分钟免费配额</td>
+        </tr>
+        <tr>
+          <td>托管平台</td>
+          <td>GitHub Pages</td>
+          <td><span class="tag tag-free">免费</span></td>
+          <td>Settings → Pages → Source: gh-pages branch；自动 HTTPS</td>
+        </tr>
+        <tr>
+          <td>域名注册</td>
+          <td>Cloudflare Registrar</td>
+          <td><span class="tag tag-paid">约 ¥80/年</span></td>
+          <td>无溢价续费；.com 约 $9.15/年；推荐购买 .com / .dev</td>
+        </tr>
+        <tr>
+          <td>DNS 解析</td>
+          <td>Cloudflare DNS</td>
+          <td><span class="tag tag-free">免费</span></td>
+          <td>A 记录指向 GitHub Pages 4 个 IP；或 CNAME 指向 user.github.io</td>
+        </tr>
+        <tr>
+          <td>CDN 加速</td>
+          <td>Cloudflare CDN</td>
+          <td><span class="tag tag-free">免费</span></td>
+          <td>接管 DNS 后自动生效；SSL 设为 Full Strict；适合港澳用户</td>
+        </tr>
+        <tr>
+          <td>本地编辑器</td>
+          <td>VS Code</td>
+          <td><span class="tag tag-free">免费</span></td>
+          <td>安装 Markdown All in One + Front Matter CMS 插件</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div><!-- end diagram-wrapper -->
+
+<script>
+(function(){
+  const t = document.querySelector('[data-theme-toggle]');
+  const r = document.documentElement;
+  let d = matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light';
+  r.setAttribute('data-theme', d);
+  t && t.addEventListener('click', () => {
+    d = d === 'dark' ? 'light' : 'dark';
+    r.setAttribute('data-theme', d);
+    t.innerHTML = d === 'dark'
+      ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>'
+      : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+  });
+})();
+</script>
+</body>
+</html>

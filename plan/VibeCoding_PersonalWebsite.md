@@ -156,7 +156,11 @@ https://domains.cloudflare.com/?domain=xzhengbr
 | CDN 加速   | Cloudflare CDN       |              |
 | 本地编辑器 | VS Code              |              |
 
+## Tools
+
 GO! Cursor!
+
+In conclusion, around 4 hours, 90K tokens, with Codex 5.3
 
 内容管理：Hugo
 
@@ -164,27 +168,34 @@ GO! Cursor!
 
 托管平台：Github pages
 
-#### 默认logo未修改
+
+
+## Problems during the progress
+
+### 默认logo未修改
+
 hugo.toml
 
   logo = "/img/blogophonic-mark-dark.png"
 换logo sanjin triple points
 
-#### 社交展示项目
+### 社交展示项目
 目前展示github, instagram, youtube
 
-#### 根目录设置
+### 根目录设置
 操作：在项目根目录执行
 在 Cursor 里打开终端，然后先进入项目目录，再逐条执行命令。
 进入项目根目录（根目录=有 hugo.toml 的目录）
-···
+
+```
 cd /Users/zheng/Developer/web_xzhengbr
 pwd
-···
+```
+
 pwd 输出如果是 /Users/zheng/Developer/web_xzhengbr，就说明位置正确。
 
 
-#### detail “详情”展示问题
+### details “详情”展示问题
 默认为details,会跟随浏览器默认UI的语言变动。
 已修改为：直接隐藏，详情折叠区，不会再显示。
 Cursor新增了站点级样式文件 assets/custom.scss，加入：
@@ -193,5 +204,156 @@ Cursor新增了站点级样式文件 assets/custom.scss，加入：
 }
 这样只影响你站点显示，不改主题源码.
 
-####
-注意，第 6 步的时候把 hugo.toml 里的默认页脚链接（License / Contact / Contributors）删掉了，以后还是可以加回来，参考别人的模版。
+## 1st Mission Complete
+
+结论：已完成从 0 到上线。
+
+你的个人网站已经可访问：https://xzhengbr.github.io/。
+
+你现在已经具备的能力：
+
+本地写内容：改 content/ 后本地预览
+线上发布：git add -> git commit -> git push 自动部署
+基础页面：About / Blog / Resume / License / Contact
+社交入口：GitHub / Instagram / YouTube
+后续日常更新最小流程：
+
+```
+cd /Users/zheng/Developer/web_xzhengbr
+git add .
+git commit -m "Update site content"
+git push
+```
+
+一句话验证：推送后到 GitHub Actions 看部署成功，再刷新线上站点确认内容更新。
+
+## Summary of the 9 steps
+
+1. 安装基础环境
+   安装并验证了 Hugo 和 Git，具备本地生成网站与版本管理能力。
+
+2. 创建 Hugo 站点骨架
+   在 web_xzhengbr 下初始化站点结构（content、assets、hugo.toml 等），建立可开发基础。
+
+3. 接入 Apéro 主题并修复初始报错
+   用子模块引入 hugo-apero，修复了配置缺失导致的 SCSS 构建错误，让本地站点可运行。
+
+4. 完成基础站点配置（英文为主）
+   配置了站点标题、作者、语言、社交链接、导航菜单；并完成首页内容显示（姓名、简介、社交入口）。
+
+5. 创建核心页面内容
+   新建并填充 About、Resume、Blog（首篇文章）页面，导航链接可正常访问。
+
+6. 清理并定制页脚
+   保留 License 与 Contact，删除默认无关项；新增了自定义 License 与 Contact 页面内容。
+
+7. 推送项目到 GitHub 仓库
+   完成仓库初始化、首次提交、远程关联与推送，仓库 main 分支上线。
+
+8. 配置 Hugo 的 GitHub Actions 部署
+   新增 .github/workflows/hugo.yml，将 Pages 构建从默认 Jekyll 切换为 Hugo 正确构建链路。
+
+9. 完成上线验证与仓库规范化
+   验证 https://xzhengbr.github.io/ 可访问；新增根目录 .gitignore，避免继续跟踪构建产物和本地临时文件。
+
+
+
+## Follow-up Maintenance and Precautions
+
+主线：本地改内容 → 本地预览 → Git 提交推送 → Actions 自动发布。
+
+### 内容编辑到网站发布的流程：
+
+#### 步骤 1：新建/修改内容
+
+博客：content/blog/...
+简历：content/resume/index.md
+关于页：content/about/index.md
+
+#### 步骤 2：本地预览
+
+在项目根目录运行：hugo server -D
+打开 http://localhost:1313 检查样式、链接、错字
+
+#### 步骤 3：提交代码
+
+终端执行：
+
+```
+git add .
+git commit -m "Update blog/resume content"
+git push
+```
+
+#### 步骤 4：自动发布
+
+GitHub Actions 会自动构建并部署到 Pages
+线上地址：https://xzhengbr.github.io/
+步骤 5：上线验证
+看 Actions 是否绿色成功
+浏览器刷新线上站点确认内容已更新
+
+一句话验证：`git push` 后 Actions 成功且线上看到新内容，就是发布完成。
+
+### 后续维护注意
+
+- 只改源码，不改产物
+  主要改 content/、hugo.toml、assets/
+  不要手动维护 public/、resources/（已在 .gitignore）
+
+- 每次改动先本地看再推送
+  避免把错链、排版错误直接上线
+
+- 提交信息写清楚
+  例如：Add post about ...、Update resume section
+
+- 主题更新要谨慎
+  themes/hugo-apero 是子模块，更新前先备份并本地预览
+
+- 外部服务配置要长期可用
+  Contact 用 Formspree 时，formspree_form_id、邮箱验证、域名白名单要保持有效
+
+- 定期检查依赖和警告
+  你现在有 languageCode 弃用警告，后续可以升级为新版 locale 配置
+
+  20260518 已更新：把 `languageCode = "en"` 改为 `locale = "en-US"`（Hugo 新版推荐字段）。
+
+## Better Todo
+
+- 首页 人物图片漫画版
+- 默认logo换成trigold points
+- 简历丰富及设置PDF下载链接
+- 更新brief about yourself.
+
+# 2nd Revise
+
+### Points 
+
+#### 站内图片管理
+
+- 双线：全站通用文件放在 static/ + 某篇文章专用图片放在该文章目录
+
+- 网站内调用文件命名统一：lowercase-with-hyphen， 如：my-resume-2026.pdf（避免空格和中文名导致链接问题）
+
+在 Markdown 里怎么引用：
+
+引用 static/ 下文件（用绝对路径）
+图片：![avatar](/media/images/site/avatar.jpg)
+PDF：[Download Resume](/media/pdf/resume/Xin_Zheng_Resume.pdf)
+引用文章私有图片（用相对路径）
+在 index.md 里写：![diagram](diagram-1.png)
+
+### Main
+
+- <u>Personal Website</u> - SOCIAL SCIENCE & SOCIAL
+- A rookie in coding, sharing blog posts <u>and my resume</u>. - and random thoughts
+- Self graph 
+- zoom in and out problem
+- the default logo
+- 
+
+
+
+
+
+### 

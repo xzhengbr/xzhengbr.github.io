@@ -298,7 +298,9 @@ git push
 
 GitHub Actions 会自动构建并部署到 Pages
 线上地址：https://xzhengbr.github.io/
-步骤 5：上线验证
+
+### 步骤 5：上线验证
+
 看 Actions 是否绿色成功
 浏览器刷新线上站点确认内容已更新
 
@@ -330,7 +332,34 @@ GitHub Actions 会自动构建并部署到 Pages
 ## Better Todo
 
 - 简历丰富及设置PDF下载链接
-- 更新brief about yourself.
+- 更新brief about yourself. [done at 20160519]
+
+# 验证发布流程-concise
+
+1. 本地看：`hugo server -D`
+
+2. 生产构建自检：`hugo --gc --minify`
+
+3. 提交主仓库：`git add/commit/push`
+
+   注意：先看状态再提
+
+   <u>检查状态：</u>
+   git status --short
+
+   <u>depends的检查：</u>
+   git show --name-only --oneline HEAD
+
+   一次性提交：
+
+   git add -A && git commit -m "Update site layout and content" && git push
+
+   <u>或者逐行提交：</u>
+   git add -A
+   git commit -m "Update site layout and content"
+   git push
+
+4. 等 GitHub Actions 完成，线上应与本地一致（除 draft 差异）
 
 # 2nd Revise
 

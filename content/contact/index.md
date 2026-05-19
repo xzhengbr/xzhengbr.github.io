@@ -1,7 +1,7 @@
 ---
 title: "Contact"
 name: "Contact Form"
-description: "You can contact me via this form."
+description: "You can reach out via this form or find me on social media below."
 type: form
 layout: split-right
 submit_button_label: "Send Message"

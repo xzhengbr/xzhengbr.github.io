@@ -1,3 +1,51 @@
 .post-body > details {
   display: none;
 }
+
+// Keep footer at viewport bottom when page content is short.
+.grid-container {
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+}
+
+// Add same hover underline effect to the brand text.
+.site-brand .site-brand-text,
+.site-brand .site-brand-text:after,
+.site-brand .site-brand-text:before {
+  transition: all .5s;
+}
+
+.site-brand .site-brand-text {
+  position: relative;
+}
+
+.site-brand .site-brand-text:after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 0%;
+  content: '.';
+  color: transparent;
+  height: .08em;
+  pointer-events: none;
+  background-color: currentColor;
+}
+
+.site-brand:hover .site-brand-text:after {
+  width: 85%;
+}
+
+// Homepage social icon sizing and spacing overrides.
+.home-social-links .social-icon-links a i {
+  font-size: 1.633333em;
+}
+
+.home-social-links .social-icon-links a {
+  margin-right: 0.75rem;
+}
+
+.home-social-links .social-icon-links a:last-child {
+  margin-right: 0;
+}

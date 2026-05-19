@@ -28,18 +28,21 @@ enableEmoji = true
   [markup.highlight]
     # one of: https://xyproto.github.io/splash/docs/ 
     style = "github"
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
     
 [params]
   orgName = "Xin Zheng"
   orgLocal = "Singapore"
   description = "A Rookie here, Charlie also, former HR, PM and Marketing in Asset Management Industriy, now a post graduate student in Social Science."
-  favicon = "/img/favicon.ico"
-  logo = "/img/blogophonic-mark-dark.png"
+  favicon = "/media/images/site/favicon.ico"
+  logo = "/media/images/site/logo-tpp-nav.png"
   mainSections = ["blog", "project", "talk"]
   navallcaps = true
   # show/hide social icons in site header & footer
   # configure social icons and links below in [[params.social]]
-  socialInHeader = true
+  socialInHeader = false
   socialInFooter = true
   # Default image for social sharing and search engines. 
   # Place image file in `static` folder and specify image name here.
@@ -135,8 +138,8 @@ enableEmoji = true
     url = "/blog/"
     weight = 2
   [[menu.header]]
-    name = "Resume"
-    title = "Resume"
+    name = "CV"
+    title = "CV"
     url = "/resume/"
     weight = 3
     

@@ -1,0 +1,18 @@
+{{ define "main" }}
+<main class="page-main pa4" role="main">
+  <section class="page-content mw7 center">
+    <article class="post-content pa0 ph4-l">
+      <header class="post-header">
+        <h1 class="f2 lh-solid measure-narrow mb3 fw7">{{ .Title }}</h1>
+        <p class="f5 lh-copy measure mt0">Search posts and pages on this site.</p>
+      </header>
+      <section class="post-body pt3 pb4">
+        <input id="search-input" class="input-reset ba b--black-20 pa3 br2 w-100 f5" type="search" placeholder="Type keywords..." aria-label="Search input">
+        <p id="search-status" class="f6 gray mt3 mb2"></p>
+        <ul id="search-results" class="list pl0 mt3"></ul>
+      </section>
+    </article>
+  </section>
+</main>
+<script src="{{ "js/search.js" | relURL }}"></script>
+{{ end }}

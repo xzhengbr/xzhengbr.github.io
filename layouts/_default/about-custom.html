@@ -1,0 +1,31 @@
+{{ define "main" }}
+<main class="page-main pa4" role="main">
+  <section class="page-content mw9 center">
+    <div class="flex-l items-start">
+      <aside class="w-100 w-third-l bg-near-white pa4 tc mb4 mb0-l">
+        {{ with .Params.avatar }}
+        <img src="{{ . | relURL }}" class="h5 w5 dib br-100" alt="avatar">
+        {{ end }}
+        <h2 class="f2 fw6 mv3">{{ .Params.author }}</h2>
+        <h5 class="f5 fw2 ttu tracked mt0 mb3">{{ .Params.role | markdownify }}</h5>
+        {{ if .Params.show_social_links }}
+        <div class="site-social-links db v-mid pv2">
+          {{ partial "shared/social-links.html" . }}
+        </div>
+        {{ end }}
+      </aside>
+
+      <article class="w-100 w-two-thirds-l pl5-l">
+        <header class="mb4">
+          <h1 class="f3 f2-l fw4 lh-title mt0 mb3">{{ (.Params.headline | default .Title) | markdownify }}</h1>
+        </header>
+        <section class="page-body pt0">
+          <div class="f5 measure-wide lh-copy">
+            {{ .Content }}
+          </div>
+        </section>
+      </article>
+    </div>
+  </section>
+</main>
+{{ end }}

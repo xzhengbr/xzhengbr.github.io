@@ -188,8 +188,7 @@ hugo.toml
 进入项目根目录（根目录=有 hugo.toml 的目录）
 
 ```
-cd /Users/zheng/Developer/web_xzhengbr
-pwd
+cd /Users/zheng/Developer/web_xzhengbr && pwd
 ```
 
 pwd 输出如果是 /Users/zheng/Developer/web_xzhengbr，就说明位置正确。
@@ -264,18 +263,28 @@ git push
 
 ### 内容编辑到网站发布的流程：
 
-#### 步骤 1：新建/修改内容
+### 步骤 1：新建/修改内容
 
 博客：content/blog/...
 简历：content/resume/index.md
 关于页：content/about/index.md
 
-#### 步骤 2：本地预览
+### 步骤 2：本地预览
 
 在项目根目录运行：hugo server -D
 打开 http://localhost:1313 检查样式、链接、错字
 
-#### 步骤 3：提交代码
+20260519: 补充一句：正式发布通常用 `hugo`（或 CI 里的 `hugo --minify`）来生成 `public` 静态文件。
+
+- 比较：`hugo server -D`, `hugo`和`hugo --minify`的区别
+  - 日常改页面：`hugo server -D` (包含draft)
+  - hugo --minify 在 hugo 基础上压缩 HTML/CSS/JS 输出（体积更小），更接近线上部署结果
+  - CI 常见还会加 hugo --gc --minify（清理未使用缓存/资源）
+  - 提交前自检一次：`hugo --minify`（或与 CI 一致：`hugo --gc --minify`）
+  - 写作阶段：开 `-D` 看草稿
+  - 发布前检查：不用 `-D`，避免草稿误发。
+
+### 步骤 3：提交代码
 
 终端执行：
 
@@ -285,7 +294,7 @@ git commit -m "Update blog/resume content"
 git push
 ```
 
-#### 步骤 4：自动发布
+### 步骤 4：自动发布
 
 GitHub Actions 会自动构建并部署到 Pages
 线上地址：https://xzhengbr.github.io/
@@ -320,8 +329,6 @@ GitHub Actions 会自动构建并部署到 Pages
 
 ## Better Todo
 
-- 首页 人物图片漫画版
-- 默认logo换成trigold points
 - 简历丰富及设置PDF下载链接
 - 更新brief about yourself.
 
@@ -333,7 +340,7 @@ GitHub Actions 会自动构建并部署到 Pages
 
 - 双线：全站通用文件放在 static/ + 某篇文章专用图片放在该文章目录
 
-- 网站内调用文件命名统一：lowercase-with-hyphen， 如：my-resume-2026.pdf（避免空格和中文名导致链接问题）
+- **网站内调用文件命名统一：lowercase-with-hyphen**， 如：my-resume-2026.pdf（避免空格和中文名导致链接问题）
 
 在 Markdown 里怎么引用：
 
@@ -343,14 +350,94 @@ PDF：[Download Resume](/media/pdf/resume/Xin_Zheng_Resume.pdf)
 引用文章私有图片（用相对路径）
 在 index.md 里写：![diagram](diagram-1.png)
 
-### Main
+### To do in the Main 
 
-- <u>Personal Website</u> - SOCIAL SCIENCE & SOCIAL
-- A rookie in coding, sharing blog posts <u>and my resume</u>. - and random thoughts
-- Self graph 
-- zoom in and out problem
-- the default logo
-- 
+- [x] <u>Personal Website</u> - SOCIAL SCIENCE & SOCIAL
+
+- [x] A rookie in coding, sharing blog posts <u>and my resume</u>. - and random thoughts
+- [x] Self graph  水彩速写风格，注意首页背景色为#f2f2f1
+- [x] Self graph version: lucid vs square background [later, now use square]
+- [x] zoom in and out problem footer problem
+- [x] the default logo to trigold points
+  1. 顶部导航 logo
+  2. 浏览器页签图标（favicon）
+- [x] 右上角删掉社交图标，增加搜索图标和功能
+- [x] 右上角Resume 改成CV
+- [ ] **未来配色如调整，可参考：https://silviacanelon.com/**
+
+content/_index.md
+
+**description**
+
+A rookie in coding, sharing blogs and my random thoughts.
+
+I was a product/human resource manager in the asset management industry. Now, I am studying Social Science at HKUST, with a particular interest in Comparative Politics and Political Economy. I enjoy embarking on new journeys toward an unknown and diverse future and engaging with "Genki" communities.
+
+
+
+### To do in the About
+
+#### Title
+
+Ni Hao do you do!<br>I'm Xin Zheng, it’s nice to meet you
+
+#### Card part
+
+selfie-round
+
+Xin Zheng
+
+Social Science & Social
+
+social networks
+
+#### Content
+
+**Paragraph about Ni Hao.**
+
+Okay, I admit "How do you do" is way too old-fashioned. But as a Chinese person surrounded by "Ni Hao" every day, plus being a fan of puns, I just couldn't pass up the chance to play around with these two greetings.
+
+Speaking of pronunciation, my first name "鑫 (Xin)" sounds like "SING" in Mandarin or "YUM" in Cantonese (though you can always just call me Charlie). Besides, "鑫" literally means very rich in Chinese. Sorry Name — I think I've betrayed you at a significant level. 
+
+This very character is also the inspiration behind my website's logo. Here is the evolution of the design:
+
+insert a png. tpp2.png
+
+**Blabla about study.**
+
+**Blabla about work.**
+
+**Paragraph about cities.**
+
+I have lived in Huangshan, Zhuhai, Guangzhou, Shanghai, Hefei and Hong Kong. These cities are well known for their scenery, cozy vibe, food, modern life, "nothing" and humidity, respectively.
+
+[only link Huangshan to wiki, later can translate to your posts: https://en.wikipedia.org/wiki/Huangshan]
+
+about-avatar-filtered.png 中心均匀裁剪，宽高各减少 10%
+
+This blog is built with [blogdown](https://github.com/rstudio/blogdown) and [Hugo](https://gohugo.io/), and deployed using [Netlify](https://www.netlify.com/). My blog posts are released under a Creative Commons Attribution-ShareAlike 4.0 International License. 
+
+
+
+
+
+
+
+### To do in the Resume
+
+Sales/ Marketing Manager --- change to "Product/Marketing Manager"
+
+add - 产品整理，架构梳理，产品方案设计，拥有丰富的从0到1（设计到销售）资管产品operational经验。
+
+
+
+### To do in the Blog
+
+
+
+### To do in the Project
+
+#### CalCurator
 
 
 

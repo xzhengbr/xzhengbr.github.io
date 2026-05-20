@@ -49,3 +49,10 @@
 .home-social-links .social-icon-links a:last-child {
   margin-right: 0;
 }
+
+// Hide heading anchor icon after titles.
+a > svg.anchor-symbol {
+  display: none;
+}
+
+// About page info card: slightly narrower and darker than page background.

@@ -1,0 +1,53 @@
+{{ define "main" }}
+<main class="page-main pa4" role="main">
+  <section class="blog-intro mw8 center mb5 tc">
+    <h2 class="f2 f1-ns lh-solid center fw4 mb3">{{ .Title | markdownify }}</h2>
+    {{ with .Description }}<p class="f6 f5-ns measure lh-copy center">{{ . | markdownify }}</p>{{ end }}
+  </section>
+
+  <section class="blog-content mw8 center">
+    {{ $root := . }}
+    {{ $paginator := .Paginate (where .RegularPagesRecursive "Type" "blog").ByDate.Reverse }}
+    {{ range $paginator.Pages }}
+      {{ $page := . }}
+      {{ $images := .Resources.ByType "image" }}
+      {{ $feature := $images.GetMatch "*feature*" }}
+      {{ $hex := $images.GetMatch "*hex*" }}
+      {{ $thumbnail := cond (ne $hex nil) $hex $feature }}
+      {{ $summary := cond (ne .Params.excerpt nil) .Params.excerpt .Summary }}
+
+      <article class="bb pv4 pv5-ns" style="border-bottom-color: #756565;">
+        <div class="flex flex-column flex-row-ns">
+          <aside class="w-100 w-20-ns pr4-ns mb3 mb0-ns">
+            {{ if $root.Params.show_post_date }}<p class="f7 ttu tracked mt0 mb2">{{ .PublishDate.Format "Jan 2, 2006" }}</p>{{ end }}
+            {{ if $root.Params.show_author_byline }}<p class="f7 i mv0">{{ with .Params.author }}{{ . }}{{ end }}</p>{{ end }}
+          </aside>
+
+          <div class="w-100 {{ if $thumbnail }}w-45-ns pr4-ns{{ else }}w-80-ns{{ end }}">
+            <h2 class="f3 lh-title mt0 mb2 fw4 underline">
+              <a href="{{ .RelPermalink }}" class="db">{{ .Title | markdownify }}</a>
+            </h2>
+            {{ with $summary }}<p class="f6 lh-copy mv2">{{ . | plainify | truncate 180 }}</p>{{ end }}
+            {{ if and $root.Params.show_tags .Params.tags }}
+              <div class="mt3">
+                {{ range .Params.tags }}
+                  <a class="f7 ba br2 ph2 pv1 mr2 mb2 dib no-underline ttu tracked" href="{{ "tags/" | absURL }}{{ . | urlize }}">{{ . }}</a>
+                {{ end }}
+              </div>
+            {{ end }}
+          </div>
+
+          {{ with $thumbnail }}
+            <figure class="w-100 w-35-ns ma0 mt3 mt0-ns">
+              <a href="{{ $page.RelPermalink }}" class="db">
+                <img src="{{ .RelPermalink }}" class="db w-75 dim ml-auto" alt="">
+              </a>
+            </figure>
+          {{ end }}
+        </div>
+      </article>
+    {{ end }}
+    {{ partial "shared/list-pagination.html" . }}
+  </section>
+</main>
+{{ end }}

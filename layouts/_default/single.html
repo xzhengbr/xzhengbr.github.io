@@ -1,5 +1,5 @@
 {{ define "main" }}
-<main class="page-main pa4" role="main">
+<main id="post-top" class="page-main pa4" role="main">
   <section class="page-content mw8 center">
     <article class="post-content pa0 ph4-l">
       <header class="post-header">
@@ -21,6 +21,7 @@
         {{ partial "shared/post-details.html" . }}
       </section>
       <footer class="post-footer">
+        <a href="#post-top" class="back-to-top-btn">Back to top ↑</a>
         {{ partial "shared/post-pagination.html" . }}
       </footer>
     </article>

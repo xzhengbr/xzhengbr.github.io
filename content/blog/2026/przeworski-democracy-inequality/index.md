@@ -1,17 +1,17 @@
 ---
-title: "Inequality matters, a critique of Przeworski's classic article"
-date: 2026-05-20
+title: "Inequality Matters: A Critique of Przeworski's Classic Article"
+date: 2026-03-09
 description: "A critique of Przeworski et al.'s classic article on democratic survival, with a focus on inequality, economic development, and institutional design."
 author: "Xin Zheng"
 draft: false
-layout: single
+layout: single-sidebar
 categories:
 - Comparative Politics
 - Political Economy
 tags:
 - democracy
 - inequality
-- institutions
+- measurement
 show_reading_time: true
 ---
 

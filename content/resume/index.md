@@ -1,6 +1,7 @@
 ---
 title: "Resume"
 description: "Resume of Xin Zheng"
+layout: single-sidebar
 show_reading_time: false
 ---
 You may also download the recent version of my <u>CV</u> here.
@@ -24,7 +25,7 @@ You may also download the recent version of my <u>CV</u> here.
 
 [@CITIC Securities](https://www.citics.com/newsite/en/) and [@GF Securities Asset Management](https://www.gfam.com.cn/)
 - Oversaw the end-to-end operational lifecycle of private equity funds, spanning from custody to regulatory filing.
-- Led the design and marketing of tailored asset management products, possessing a proven track record of driving "0-to-1" product launches across fixed income, derivatives, and QDII.
+- Led the design and marketing of tailored asset management products, possessing a proven track record of driving "0-to-1" product launches across fixed income, derivatives, ABS, and QDII.
 - **2023 Annual Outstanding Employee Award**.
 - **2022 Annual Outstanding Team Member Award**.
 

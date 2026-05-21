@@ -1,10 +1,10 @@
 ---
 title: "Site Analysis of the Seventh Mosque in Hong Kong"
-date: 2026-05-20
+date: 2025-05-17
 description: "A GIS-based site analysis for Hong Kong's seventh mosque, focusing on Muslim population growth, service gaps, spatial demand, and policy recommendations."
 author: "Xin Zheng"
 draft: false
-layout: single
+layout: single-sidebar
 categories:
 - Urban Studies
 - Social Policy

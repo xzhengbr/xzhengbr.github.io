@@ -9,32 +9,28 @@
 }
 
 // Add same hover underline effect to the brand text.
-.site-brand .site-brand-text,
-.site-brand .site-brand-text:after,
-.site-brand .site-brand-text:before {
-  transition: all .5s;
-}
-
 .site-brand .site-brand-text {
   position: relative;
 }
 
 .site-brand .site-brand-text:after {
   position: absolute;
-  bottom: 0;
+  bottom: 0.1em;
   left: 0;
   right: 0;
   margin: auto;
-  width: 0%;
-  content: '.';
-  color: transparent;
-  height: .08em;
+  width: 86%;
+  content: "";
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.35s ease;
+  height: 0.08em;
   pointer-events: none;
   background-color: currentColor;
 }
 
 .site-brand:hover .site-brand-text:after {
-  width: 85%;
+  transform: scaleX(1);
 }
 
 // Homepage social icon sizing and spacing overrides.
@@ -56,3 +52,255 @@ a > svg.anchor-symbol {
 }
 
 // About page info card: slightly narrower and darker than page background.
+.about-info-card {
+  background-color: rgba(148, 86, 76, 0.07);
+}
+
+.site-brand-inline {
+  display: inline-flex;
+  align-items: center;
+}
+
+.site-brand-logo {
+  height: 1.3rem;
+}
+
+.home-hero-image {
+  width: 80%;
+}
+
+// Blog list divider color override.
+.blog-content article.blog-post-divider {
+  border-bottom-color: #d3d3d3 !important;
+}
+
+.blog-row-stable {
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (min-width: 30em) {
+  .blog-row-stable {
+    display: grid;
+    grid-template-columns: 16fr 52fr 32fr;
+    column-gap: 3rem;
+    align-items: start;
+  }
+
+  .blog-post-text-col--no-image {
+    grid-column: 2 / span 2;
+  }
+}
+
+// Post page back-to-top button.
+.back-to-top-btn {
+  display: block;
+  width: fit-content;
+  margin: 0 auto 1rem;
+  padding: 0.45rem 0.85rem;
+  border-radius: 9999px;
+  font-size: 0.82rem;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  color: #9b4d40;
+  background: rgba(155, 77, 64, 0.12);
+  border: 1px solid rgba(155, 77, 64, 0.28);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.back-to-top-btn:hover {
+  background: rgba(155, 77, 64, 0.2);
+  border-color: rgba(155, 77, 64, 0.45);
+}
+
+// Blog single-sidebar: custom layout embeds sidebar inside page-main.
+.single-sidebar .page-main {
+  grid-column: 1 / 7;
+}
+
+// Blog single-sidebar hero and metadata.
+.post-hero {
+  background-color: rgba(26, 40, 62, 0.80);
+  min-height: 15rem;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.post-hero--image::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(26, 40, 62, 0.80);
+  z-index: 1;
+}
+
+.post-hero--image {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.post-hero > div {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.post-hero-tag {
+  display: inline-block;
+  margin: 0 0.45rem 0.45rem 0;
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.page-main .post-hero .post-hero-tag,
+.page-main .post-hero .post-hero-tag:hover,
+.page-main .post-hero .post-hero-tag:focus {
+  border: 1px solid rgba(235, 235, 235, 0.85);
+  color: rgba(235, 235, 235, 0.85);
+  background-color: transparent;
+}
+
+.post-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "meta"
+    "toc"
+    "main";
+}
+
+.post-layout--resume .post-toc-aside {
+  display: none;
+}
+
+@media screen and (min-width: 60em) {
+  .post-layout {
+    grid-template-columns: 80fr 20fr;
+    column-gap: 2rem;
+    grid-template-areas:
+      "meta toc"
+      "main toc";
+  }
+
+  .post-layout--resume {
+    grid-template-areas: "main toc";
+    grid-template-rows: auto;
+  }
+
+  .post-layout--resume .post-toc-aside {
+    display: flex;
+  }
+
+  .post-layout--resume .post-toc-card {
+    padding-top: 4rem;
+  }
+}
+
+.post-meta-grid {
+  grid-area: meta;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 2rem;
+  padding: 1rem 0 1rem;
+}
+
+.post-toc-aside {
+  grid-area: toc;
+  display: flex;
+  flex-direction: column;
+}
+
+.post-main {
+  grid-area: main;
+  min-width: 0;
+}
+
+.post-toc-card {
+  position: sticky;
+  top: 1.5rem;
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: 0;
+}
+
+@media screen and (min-width: 60em) {
+  .post-toc-aside {
+    align-self: stretch;
+  }
+
+  // Align "Table of contents" with the first line of post body (below meta grid).
+  .post-toc-card {
+    padding-top: calc(1rem + 2.75rem + 1rem + 1rem);
+  }
+}
+
+.post-toc-card nav#TableOfContents {
+  color: inherit;
+}
+
+.post-toc-card nav#TableOfContents ul {
+  margin: 0;
+  padding-left: 0.85rem;
+  border-left: 1px solid #d3d3d3;
+  list-style: none;
+  font-family: inherit;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.post-toc-card nav#TableOfContents li {
+  margin: 0.35rem 0;
+  padding-left: 0;
+  font-family: inherit;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.post-toc-card nav#TableOfContents a {
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: inherit;
+  opacity: 0.7;
+  text-decoration: none;
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.post-toc-card nav#TableOfContents li.is-active a,
+.post-toc-card nav#TableOfContents a:hover,
+.post-toc-card nav#TableOfContents a:focus {
+  color: #BB4625;
+  opacity: 1;
+}
+
+.post-body h2 {
+  font-weight: 700;
+  border-bottom: 1px solid #d3d3d3;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.post-body hr {
+  border-color: #d3d3d3;
+}
+
+.post-body table {
+  border-color: #d3d3d3;
+
+  th,
+  td {
+    border-color: #d3d3d3;
+  }
+}
+

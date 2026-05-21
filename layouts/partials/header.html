@@ -1,8 +1,8 @@
 {{ $page := . }}
-<header class="site-header pt4 pb2 mb4 bb b--transparent ph5 headroom z-max" role="banner">
+<header class="site-header pt3 pb3 mb0 bb b--transparent ph5 headroom z-max" role="banner">
   <nav class="site-nav db dt-l w-100" role="navigation">
     <a class="site-brand db dtc-l v-mid link no-underline w-100 w-33-l tc tl-l" href="{{ .Site.BaseURL }}" title="Home">
-      {{ if .Site.Params.logo }}<span class="dib v-mid" style="display:inline-flex;align-items:center;"><img src="{{ .Site.Params.logo | relURL }}" class="dib w-auto v-mid" style="height: 1.3rem;" alt="{{ .Site.Title }}"><span class="site-brand-text dib v-mid ml2 f6 f5-l pv1 ph2 {{ if $.Site.Params.navallcaps }}ttu tracked{{ end }}">{{ .Site.Title }}</span></span>{{ else }}<span class="site-brand-text f6 f5-l pv1 ph2 {{ if $.Site.Params.navallcaps }}ttu tracked{{ end }}">{{ .Site.Title }}</span>{{ end }}
+      {{ if .Site.Params.logo }}<span class="dib v-mid site-brand-inline"><img src="{{ .Site.Params.logo | relURL }}" class="dib w-auto v-mid site-brand-logo" alt="{{ .Site.Title }}"><span class="site-brand-text dib v-mid ml2 f6 f5-l pv1 ph2 {{ if $.Site.Params.navallcaps }}ttu tracked{{ end }}">{{ .Site.Title }}</span></span>{{ else }}<span class="site-brand-text f6 f5-l pv1 ph2 {{ if $.Site.Params.navallcaps }}ttu tracked{{ end }}">{{ .Site.Title }}</span>{{ end }}
     </a>
     <div class="site-links db dtc-l v-mid w-100 w-47-l tc tr-l mt3 mt0-l {{ if $.Site.Params.navallcaps }}ttu tracked{{ end }}">
       {{ range .Site.Menus.header }}

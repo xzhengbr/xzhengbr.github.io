@@ -1,0 +1,31 @@
+{{ define "main" }}
+<main id="post-top" class="page-main" role="main">
+  <section class="ph4 pb4 pt2">
+    <div class="mw8 center">
+      <h1 class="f1 lh-solid measure-narrow mb4 mv0">{{ .Title }}</h1>
+
+      <div class="post-layout post-layout--resume">
+        <aside class="post-toc-aside mb4 mb0-l">
+          <div class="post-toc-card">
+            <p class="f7 ttu tracked mv0 mb3 o-70">Table of contents</p>
+            {{ .TableOfContents }}
+          </div>
+        </aside>
+
+        <section class="post-main pr0 pr4-l">
+          <article class="post-content pa0">
+            <section class="post-body pt0 pb4">
+              {{ .Content }}
+            </section>
+            <footer class="post-footer">
+              <a href="#post-top" class="back-to-top-btn">Back to top ↑</a>
+            </footer>
+          </article>
+        </section>
+      </div>
+    </div>
+  </section>
+</main>
+{{ $tocSpy := resources.Get "js/toc-spy.js" | minify | fingerprint }}
+<script src="{{ $tocSpy.RelPermalink }}" type="text/javascript"></script>
+{{ end }}

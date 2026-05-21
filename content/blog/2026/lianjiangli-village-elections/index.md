@@ -1,16 +1,16 @@
 ---
-title: "Too short to make a significance: A critique of Lianjiang Li's work"
-date: 2026-05-20
+title: "Too Short to Matter: A Critique of Lianjiang Li's Work"
+date: 2026-04-06
 description: "A critique of Lianjiang Li's study on Chinese village elections and external political efficacy, focusing on short observation windows, measurement validity, and the gap between intention and action."
 author: "Xin Zheng"
 draft: false
-layout: single
+layout: single-sidebar
 categories:
 - Comparative Politics
 - Political Behavior
 tags:
-- elections
-- China
+- election
+- rural China
 - political efficacy
 show_reading_time: true
 ---

@@ -1,0 +1,69 @@
+{{ define "main" }}
+{{ $images := .Resources.ByType "image" }}
+{{ $feature := $images.GetMatch "*feature*" }}
+<main id="post-top" class="page-main" role="main">
+  <section class="post-hero{{ if $feature }} post-hero--image{{ end }}"{{ with $feature }} style="background-image: url('{{ .RelPermalink }}');"{{ end }}>
+    <div class="mw8 center ph4">
+      <div class="post-hero-content w-100 w-80-l">
+      <h1 class="f1 lh-title white mv0">{{ .Title }}</h1>
+      {{ with .Params.description }}<p class="f5 white-90 mt3 mb0">{{ . }}</p>{{ end }}
+      {{ with .Params.tags }}
+      <div class="mt3">
+        {{ range . }}
+          <a class="post-hero-tag" href="{{ "tags/" | absURL }}{{ . | urlize }}">{{ . }}</a>
+        {{ end }}
+      </div>
+      {{ end }}
+      </div>
+    </div>
+  </section>
+
+  <section class="ph4 pb4 pt2">
+    <div class="post-layout mw8 center">
+      <div class="post-meta-grid mb3">
+        <div>
+          <p class="f7 ttu tracked mv0 o-70">Author</p>
+          <p class="f5 mv1">{{ .Params.author | default "Unknown" }}</p>
+        </div>
+        <div>
+          <p class="f7 ttu tracked mv0 o-70">Published</p>
+          <p class="f5 mv1">{{ .PublishDate.Format "January 2, 2006" }}</p>
+        </div>
+      </div>
+
+      <aside class="post-toc-aside mb4 mb0-l">
+        <div class="post-toc-card">
+          <p class="f7 ttu tracked mv0 mb3 o-70">Table of contents</p>
+          {{ .TableOfContents }}
+        </div>
+      </aside>
+
+      <section class="post-main pr0 pr4-l">
+        {{ if .Params.links }}
+        <div class="mb4">
+          {{ partial "shared/btn-links.html" . }}
+        </div>
+        {{ end }}
+
+        <article class="post-content pa0">
+          <section class="post-body pt0 pb4">
+            {{ .Content }}
+            {{ .Scratch.Set "details" "closed" }}
+            {{ partial "shared/post-details.html" . }}
+          </section>
+          <footer class="post-footer">
+            <a href="#post-top" class="back-to-top-btn">Back to top ↑</a>
+            {{ partial "shared/post-pagination.html" . }}
+          </footer>
+        </article>
+
+        {{ if .Params.show_comments }}
+          {{ partial "shared/comments.html" . }}
+        {{ end }}
+      </section>
+    </div>
+  </section>
+</main>
+{{ $tocSpy := resources.Get "js/toc-spy.js" | minify | fingerprint }}
+<script src="{{ $tocSpy.RelPermalink }}" type="text/javascript"></script>
+{{ end }}

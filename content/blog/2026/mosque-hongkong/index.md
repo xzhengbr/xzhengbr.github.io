@@ -106,7 +106,7 @@ Sites suitable for planning a mosque are identified as Government, Institution o
 
 #### Mosque Demand Index
 
-First, centered on the six existing mosques, in ArcGIS Pro, choose Analysis > Tools > Buffer, with distance selected as 5 kilometers, getting a 5-kilometer radius centered on each mosque. Then select Analysis > Tools > Intersect to combine the radiation area for the population data and the administrative district, which contains the Muslim population that can be covered by a mosque, , as shown below:
+First, centered on the six existing mosques, in ArcGIS Pro, choose Analysis > Tools > Buffer, with distance selected as 5 kilometers, getting a 5-kilometer radius centered on each mosque. Then select Analysis > Tools > Intersect to combine the radiation area for the population data and the administrative district, which contains the Muslim population that can be covered by a mosque, as shown below.
 
 <p class="tc">
   <img src="figure1-distribution-of-mosques-in-hk.png" alt="figure1" style="width:60%; height:auto;" />
@@ -227,7 +227,7 @@ This study substantiates the urgent need for Hong Kong's seventh mosque through 
 
 The project transcends religious infrastructure: it addresses systemic inequities for non-Chinese Muslims facing linguistic exclusion and implicit bias while advancing Hong Kong's branding as "Asia's World City." With only 6.5% of hotels rated Muslim-friendly, the mosque could anchor broader initiatives, including halal tourism and Islamic finance hubs, to counter regional competitors like Singapore. Policy imperatives include fast-tracking GIC land transfers, cross-sectoral funding models, and co-designing facilities such as women's prayer spaces and libraries with the Islamic Community Fund.
 
-Future research should integrate temporal mobility data, such as domestic workers' Sunday movements, and evaluate socio-cultural impacts through community ethnography. Nevertheless, this analysis delivers actionable blueprints for spatial justice. By situating the mosque within Northern Metropolis development and interfaith dialogue frameworks, Hong Kong can transform demographic pressures into a testament of inclusive urbanism, fulfilling its Basic Law mandate while modeling global-city pluralism.
+Future research should integrate temporal mobility data, such as domestic workers' Sunday movements, and evaluate socio-cultural impacts through community ethnography. Nevertheless, this analysis delivers actionable blueprints for spatial justice. By situating the mosque within Northern Metropolis development and interfaith dialogue frameworks, Hong Kong can transform demographic pressures into a testament of inclusive urbanism, fulfilling its Basic Law mandate while modeling global-city pluralism. <img src="/media/images/site/logo-tpp-nav.png" alt="TPP logo" style="height: 1rem; width: auto; vertical-align: -0.1em;">
 
 
 [^1]: Hong Kong Government. *Hong Kong Yearbook 2001.* Accessed May 2025. https://www.yearbook.gov.hk/2001. Hong Kong Government. *Hong Kong Yearbook 2022.* Accessed May 2025. https://www.yearbook.gov.hk/2022.

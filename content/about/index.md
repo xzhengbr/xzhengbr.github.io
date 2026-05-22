@@ -16,7 +16,7 @@ Speaking of pronunciation, my first name "鑫 (Xin)" sounds like "SING" in Manda
 
 This very character is also the inspiration behind my website's logo. 
 
-<img src="/media/images/site/logo-tpp-nav-black.png" alt="Logo mark" style="height: 1em; width: auto; vertical-align: -0.1em; margin-right: 0.5ch;">Here is the evolution of the design:
+<img src="/media/images/site/logo-tpp-nav.png" alt="Logo mark" style="height: 1em; width: auto; vertical-align: -0.1em; margin-right: 0.5ch;">Here is the evolution of the design:
 
 <img src="/media/images/site/tpp2.jpg" alt="Evolution of the logo design" style="width: 85%; max-width: 612px; height: auto; display: block;">
 

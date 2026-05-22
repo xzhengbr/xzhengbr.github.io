@@ -47,5 +47,5 @@ You may also download the recent version of my <u>CV</u> here.
 
 - Programming: Python, R, LaTeX (learning, allegedly).
 - Pretend Tools: Git, GitHub, VS Code.
-- Actual Tools: Cursor, Hugo.
+- Actual Tools: Cursor, Hugo Apéro.
 - Interests: Do nothing and blame others.

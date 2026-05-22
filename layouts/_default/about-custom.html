@@ -2,7 +2,7 @@
 <main class="page-main pa4" role="main">
   <section class="page-content mw9 center">
     <div class="flex-l items-start">
-      <aside class="w-100 w-30-l ph4 pt6 pb6 tc mb4 about-info-card">
+      <aside class="w-100 w-30-l ph4 pt4 pb4 pt6-l pb7-l tc mb4 about-info-card">
         {{ with .Params.avatar }}
         <img src="{{ . | relURL }}" class="h5 w5 dib br-100" alt="avatar">
         {{ end }}
@@ -15,7 +15,7 @@
         {{ end }}
       </aside>
 
-      <article class="w-100 w-two-thirds-l pl5-l">
+      <article class="w-100 w-two-thirds-l pl5-l pt4-l">
         <header class="mb4">
           <h1 class="f3 f2-l fw4 lh-title mt0 mb3">{{ (.Params.headline | default .Title) | markdownify }}</h1>
         </header>

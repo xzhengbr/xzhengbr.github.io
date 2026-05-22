@@ -29,10 +29,10 @@
           </aside>
 
           <div class="w-100 blog-post-text-col{{ if not $thumbnail }} blog-post-text-col--no-image{{ end }}">
-            <h2 class="f3 lh-title mt0 mb2 fw4 underline">
+            <h2 class="f4 f3-l lh-title mt0 mb2 fw4 underline">
               <a href="{{ .RelPermalink }}" class="db">{{ .Title | markdownify }}</a>
             </h2>
-            {{ with $summary }}<p class="f6 lh-copy mv2">{{ . | plainify | truncate 180 }}</p>{{ end }}
+            {{ with $summary }}<p class="f6 lh-copy mv2">{{ . | plainify | truncate 205 }}</p>{{ end }}
             {{ if and $root.Params.show_tags .Params.tags }}
               <div class="mt3">
                 {{ range .Params.tags }}

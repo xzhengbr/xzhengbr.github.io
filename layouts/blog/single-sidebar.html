@@ -5,7 +5,7 @@
   <section class="post-hero{{ if $feature }} post-hero--image{{ end }}"{{ with $feature }} style="background-image: url('{{ .RelPermalink }}');"{{ end }}>
     <div class="mw8 center ph4">
       <div class="post-hero-content w-100 w-80-l">
-      <h1 class="f1 lh-title white mv0">{{ .Title }}</h1>
+      <h1 class="f2 f1-l lh-title white mv0">{{ .Title }}</h1>
       {{ with .Params.description }}<p class="f5 white-90 mt3 mb0">{{ . }}</p>{{ end }}
       {{ with .Params.tags }}
       <div class="mt3">

@@ -106,7 +106,12 @@ Sites suitable for planning a mosque are identified as Government, Institution o
 
 #### Mosque Demand Index
 
-First, centered on the six existing mosques, in ArcGIS Pro, choose Analysis > Tools > Buffer, with distance selected as 5 kilometers, getting a 5-kilometer radius centered on each mosque. Then select Analysis > Tools > Intersect to combine the radiation area for the population data and the administrative district, which contains the Muslim population that can be covered by a mosque.
+First, centered on the six existing mosques, in ArcGIS Pro, choose Analysis > Tools > Buffer, with distance selected as 5 kilometers, getting a 5-kilometer radius centered on each mosque. Then select Analysis > Tools > Intersect to combine the radiation area for the population data and the administrative district, which contains the Muslim population that can be covered by a mosque, , as shown below:
+
+<p class="tc">
+  <img src="figure1-distribution-of-mosques-in-hk.png" alt="figure1" style="width:60%; height:auto;" />
+</p>
+<p class="tc f5">Figure 1. Distribution of Muslims and mosques in Hong Kong</p>
 
 Next, a comprehensive Mosque Demand Index was constructed to objectively assess the demand for new mosques in the 18 districts of Hong Kong. This index consists of four indicators: the Muslim minority population in 2021, the Muslim minority population not covered by mosques in 2021, the growth trend of the Muslim minority population from 2011 to 2021, and the closest distance to any existing mosque.
 
@@ -136,30 +141,18 @@ Combining the above four indicators and summing them with equal weights, a score
 
 Table 1. Mosque Demand Index
 
-| No. | District | Indicator 1 | Score 1 | Indicator 2 | Score 2 | Indicator 3 | Score 3 | Score 4 | Total Score |
-|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
-| 1 | Yuen Long | 13181 | 17 | 13181 | 18 | 21% | 15 | 15 | 65 |
-| 2 | Sha Tin | 12222 | 16 | 11023 | 17 | 14% | 12 | 11 | 56 |
-| 3 | Tuen Mun | 7612 | 9 | 7612 | 15 | 15% | 13 | 17 | 54 |
-| 4 | Kwai Tsing | 8684 | 11 | 7239 | 14 | 28% | 17 | 9 | 51 |
-| 5 | Kwun Tong | 9291 | 13 | 6091 | 11 | 23% | 16 | 10 | 50 |
-| 6 | Sai Kung | 10613 | 14 | 10412 | 16 | 4% | 6 | 14 | 50 |
-| 7 | Islands | 3191 | 1 | 3177 | 8 | 29% | 18 | 18 | 45 |
-| 8 | North | 4739 | 2 | 4739 | 10 | 20% | 14 | 16 | 42 |
-| 9 | Tsuen Wan | 7229 | 8 | 7229 | 13 | 4% | 5 | 12 | 38 |
-| 10 | Tai Po | 6452 | 5 | 6452 | 12 | 7% | 7 | 13 | 37 |
-| 11 | Kowloon City | 10962 | 15 | 1196 | 7 | 8% | 8 | 5 | 35 |
-| 12 | Wong Tai Sin | 6458 | 6 | 3418 | 9 | 13% | 10 | 8 | 33 |
-| 13 | Eastern | 15361 | 18 | 1042 | 4 | -2% | 4 | 4 | 30 |
-| 14 | Sham Shui Po | 8215 | 10 | 598 | 3 | 13% | 11 | 6 | 30 |
-| 15 | Yau Tsim Mong | 9015 | 12 | 1147 | 6 | -7% | 1 | 1 | 20 |
-| 16 | Southern | 6450 | 4 | 1067 | 5 | -5% | 2 | 7 | 18 |
-| 17 | Wan Chai | 5206 | 3 | 18 | 1 | 10% | 9 | 3 | 16 |
-| 18 | Central and Western | 6538 | 7 | 134 | 2 | -4% | 3 | 2 | 14 |
+<p class="tc post-table-image">
+  <img src="table1-mosque-demand-index.png" alt="table1" style="width:100%; height:auto;" />
+</p>
 
 ### Site Selection Analysis in Candidate Districts
 
-In ArcGIS Pro, importing Yuen Long Outline Zoning Plan, Sha Tin Outline Zoning Plan, and Tuen Mun Outline Zoning Plan shapefiles, and checking that all three coordinate systems are Hong Kong 1980 Grid System, can support site-level analysis.
+In ArcGIS Pro, importing Yuen Long Outline Zoning Plan, Sha Tin Outline Zoning Plan, and Tuen Mun Outline Zoning Plan shapefiles, and checking that all three coordinate systems are Hong Kong 1980 Grid System, as shown in the figure below.
+
+<p class="tc">
+  <img src="figure2-planning-area-in-hk.png" alt="figure2" style="width:80%; height:auto;" />
+</p>
+<p class="tc f5">Figure 2. Schematic diagram of the planning area</p>
 
 ### Comparative Analysis Between Candidate Districts
 
@@ -175,6 +168,11 @@ Repeat the Yuen Long District operation and use the Intersect and Erase analysis
 
 Repeat the Yuen Long District operation.
 
+<p class="tc">
+  <img src="figure3-yuanlong-shatim.png" alt="figure3" style="width:80%; height:auto;" />
+</p>
+<p class="tc f5">Figure 3. Newly Covered Muslims by assumptive Mosque in Sha Tin and Yuen Long</p>
+
 Calculating the number of Muslims that can be newly covered by building a mosque in the planning plots of the three districts in the Attribute Table yields the following table, in which Sha Tin (15,814) covers the highest number of new people, followed by Yuen Long (8,582).
 
 Table 2. Newly Covered Muslims by New Mosque
@@ -187,7 +185,7 @@ Finally, considering the index of demand for mosques and the number of people co
 
 In the future, if there is a need for a seventh mosque in Hong Kong, choices of Yuen Long (S/YL/27, GIC, NO_16) and Sha Tin (S/ST/38, GIC, NO_3) could be considered, and further analysis will require more field surveys and interviews.
 
-## Policy Recommendations
+## Policy Advices
 
 Hong Kong's Muslim community has grown significantly, straining the six existing mosques. A new mosque in Hong Kong could ease this pressure, providing accessible worship spaces. A new mosque would support non-Chinese Muslims, who often face language barriers and discrimination, by offering a space for worship and community activities. It would also signal Hong Kong's commitment to religious freedom, ensuring equitable access to religious facilities in a city with many Buddhist and Taoist temples.
 
@@ -195,13 +193,33 @@ Building a mosque could make Hong Kong more attractive to Muslim tourists and re
 
 The government should allocate land in the New Territories, streamline approvals, and offer financial incentives for mosque construction. Engaging Muslim organizations and promoting interfaith dialogue will ensure community support and inclusivity.
 
-1. Formal Recognition: Issue a policy statement acknowledging the Muslim community's growth and the need for additional mosques to ensure equitable religious access.
-2. Land Allocation: Allocate land in the New Territories, prioritizing sites near public transport to serve residents and visitors.
-3. Streamlined Approvals: Simplify land acquisition, permits, and funding processes, addressing delays seen in the Sheung Shui project.
-4. Financial Support: Offer grants, subsidies, or tax incentives and encourage public-private partnerships to fund construction.
-5. Inclusive Design: Engage Muslim organizations like the Islamic Community Fund to design facilities for women, youth, and education.
-6. Community Engagement: Promote interfaith dialogue and public awareness to build support and counter opposition.
-7. Muslim-Friendly Infrastructure: Integrate the mosque with initiatives to increase halal dining and prayer facilities in public spaces.
+1. Formal Recognition
+
+    Issue a policy statement acknowledging the Muslim community's growth and the need for additional mosques to ensure equitable religious access.
+
+2. Land Allocation
+
+    Allocate land in the New Territories, prioritizing sites near public transport to serve residents and visitors.
+
+3. Streamlined Approvals
+
+    Simplify land acquisition, permits, and funding processes, addressing delays seen in the Sheung Shui project.
+
+4. Financial Support
+
+    Offer grants, subsidies, or tax incentives and encourage public-private partnerships to fund construction.
+
+5. Inclusive Design
+
+    Engage Muslim organizations like the Islamic Community Fund to design facilities for women, youth, and education.
+
+6. Community Engagement
+
+    Promote interfaith dialogue and public awareness to build support and counter opposition.
+
+7. Muslim-Friendly Infrastructure
+
+    Integrate the mosque with initiatives to increase halal dining and prayer facilities in public spaces.
 
 ## Conclusion
 

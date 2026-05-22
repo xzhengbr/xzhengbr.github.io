@@ -1,6 +1,6 @@
 ---
 title: "About"
-headline: "Ni Hao do you do!<br>This is Xin, nice to meet you"
+headline: "**Ni Hao** do you do!<br>This is Xin, nice to meet you"
 description: "About Xin Zheng"
 layout: "about-custom"
 show_reading_time: false
@@ -22,4 +22,4 @@ This very character is also the inspiration behind my website's logo.
 
 I have lived in [Huangshan](https://en.wikipedia.org/wiki/Huangshan), Zhuhai, Guangzhou, Shanghai, Hefei and Hong Kong. These cities are well known for their scenery, cozy vibe, food, modern life, "nothing" and humidity, respectively.
 
-This website is built with [Hugo](https://gohugo.io/) and the [Hugo Apéro](https://github.com/hugo-apero/hugo-apero) theme, and deployed to [GitHub Pages](https://pages.github.com/). My blog posts are released under a [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/).
+This website is built with [Hugo](https://gohugo.io/) and the [Hugo Apéro](https://github.com/hugo-apero/hugo-apero) theme, with layout design inspired by [Dianyi Yang](https://rubuky.com/) and [Silvia Canelón](https://silviacanelon.com/), and deployed to [GitHub Pages](https://github.com/xzhengbr/xzhengbr.github.io). My blog posts are released under a [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/).

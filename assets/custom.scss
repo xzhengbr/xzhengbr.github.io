@@ -291,8 +291,28 @@ a > svg.anchor-symbol {
   margin-bottom: 1.5rem;
 }
 
+.post-hero + section .post-body h2 {
+  font-size: 1.5rem;
+}
+
+@media screen and (min-width: 60em) {
+  .post-hero + section .post-body h2 {
+    font-size: 2.25rem;
+  }
+}
+
 .post-body hr {
   border-color: #d3d3d3;
+}
+
+.post-body ol,
+.post-body ul:not(.panel-tabs) {
+  max-width: none;
+}
+
+.post-body > table {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .post-body table {
@@ -301,6 +321,22 @@ a > svg.anchor-symbol {
   th,
   td {
     border-color: #d3d3d3;
+  }
+}
+
+.post-body p.post-table-image {
+  border-style: solid;
+  border-width: 0.125rem;
+  border-color: #d3d3d3;
+  box-sizing: border-box;
+  line-height: 0;
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    border: 0;
   }
 }
 
